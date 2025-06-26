@@ -1024,6 +1024,13 @@ require('lazy').setup({
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
+  {
+    'luk400/vim-jukit',
+    config = function()
+      -- this is an example, not a default. Please see the readme for more configuration options
+      vim.keymap.set('n', '<C-CR>', ':call jukit#send#line()<cr>')
+    end,
+  },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
@@ -1042,6 +1049,7 @@ require('lazy').setup({
   require 'kickstart.plugins.tmux-navigator',
   require 'kickstart.plugins.catppuccin',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.markdown',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
