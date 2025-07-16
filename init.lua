@@ -1,5 +1,4 @@
 --[[
--- tiny commit 
 
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
@@ -168,13 +167,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 --- NOTE Custom keybinds.
----
----
----
 vim.g.python3_host_prog = '/home/ernst/py3nvim/bin/python3'
-
--- Vim Slime
-vim.g.slime_target = 'tmux'
 
 vim.cmd 'set expandtab'
 vim.cmd 'set tabstop=2'
@@ -194,16 +187,6 @@ vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
 --
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
--- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
@@ -259,21 +242,6 @@ require('lazy').setup({
   -- keys can be used to configure plugin behavior/loading/etc.
   --
   -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
-  --
-
-  -- Alternatively, use `config = function() ... end` for full control over the configuration.
-  -- If you prefer to call `setup` explicitly, use:
-  --    {
-  --        'lewis6991/gitsigns.nvim',
-  --        config = function()
-  --            require('gitsigns').setup({
-  --                -- Your gitsigns configuration here
-  --            })
-  --        end,
-  --    }
-  --
-  -- Here is a more advanced example where we pass configuration
-  -- options to `gitsigns.nvim`.
   --
   -- See `:help gitsigns` to understand what the configuration keys do
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -445,7 +413,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      -- vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -1034,8 +1002,13 @@ require('lazy').setup({
     'jpalardy/vim-slime',
     init = function()
       vim.g.slime_no_mappings = 0
-      vim.g.slime_default_config = { socket_name = 'default', target_pane = 1.2 }
       vim.g.slime_dont_ask_default = 1
+      vim.g.slime_default_config = { socket_name = 'default', target_pane = 1.2 }
+      vim.g.slime_target = 'tmux'
+      vim.g.slime_cell_delimiter = '#%%'
+      vim.keymap.set('n', '<leader><leader>', '<Plug>SlimeParagraphSend')
+      vim.keymap.set('v', '<leader><leader>', '<Plug>SlimeRegionSend')
+      vim.keymap.set('n', '<leader>sc', '<Plug>SlimeSendCell')
     end,
   },
   -- {
