@@ -168,7 +168,13 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 --- NOTE Custom keybinds.
+---
+---
+---
 vim.g.python3_host_prog = '/home/ernst/py3nvim/bin/python3'
+
+-- Vim Slime
+vim.g.slime_target = 'tmux'
 
 vim.cmd 'set expandtab'
 vim.cmd 'set tabstop=2'
@@ -1025,12 +1031,20 @@ require('lazy').setup({
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
   {
-    'luk400/vim-jukit',
-    config = function()
-      -- this is an example, not a default. Please see the readme for more configuration options
-      vim.keymap.set('n', '<C-CR>', ':call jukit#send#line()<cr>')
+    'jpalardy/vim-slime',
+    init = function()
+      vim.g.slime_no_mappings = 0
+      vim.g.slime_default_config = { socket_name = 'default', target_pane = 1.2 }
+      vim.g.slime_dont_ask_default = 1
     end,
   },
+  -- {
+  --   'luk400/vim-jukit',
+  --   config = function()
+  --     -- this is an example, not a default. Please see the readme for more configuration options
+  --     vim.keymap.set('n', '<C-CR>', ':call jukit#send#line()<cr>')
+  --   end,
+  -- },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
